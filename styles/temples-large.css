@@ -1,0 +1,39 @@
+/* Header Horizontal Flex Modifications */
+header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+#menu-toggle {
+    display: none; /* Hide hamburger trigger element on desktop screens */
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin-top: 0;
+}
+
+nav a {
+    padding: 0.5rem 1rem;
+    border-top: none;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+    background-color: transparent;
+    border-bottom: 2px solid #38bdf8;
+}
+
+/* Expand Grid System Layout to 3 Columns on Large Screens */
+.grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+}

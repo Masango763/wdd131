@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    background-color: #f8fafc;
+    color: #0f172a;
+    padding: 1.5rem;
+}
+header, main, footer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+header {
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+.hero {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #cbd5e1;
+}
+.hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+}
+footer {
+    margin-top: 4rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+}

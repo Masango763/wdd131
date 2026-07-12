@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WDD 131 – Week 03 Activity testing JavaScript function variations.">
+  <meta name="author" content="Masango Dewheretsoko">
+  <title>WDD 131 – JavaScript Functions Lab</title>
+  <style>
+    body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 600px; margin: 2rem auto; padding: 0 1rem; background-color: #f8fafc; color: #0f172a; }
+    .output-card { background: white; padding: 1.25rem; border-radius: 6px; border-left: 4px solid #7c3aed; margin-top: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .highlight { font-weight: 600; color: #7c3aed; }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Functions Portal</h1>
+  <div class="output-card">
+    <p><strong>1. Function Declaration:</strong> <span id="decl-output" class="highlight">Loading...</span></p>
+    <p><strong>2. Function Expression:</strong> <span id="expr-output" class="highlight">Loading...</span></p>
+    <p><strong>3. Arrow Function:</strong> <span id="arrow-output" class="highlight">Loading...</span></p>
+  </div>
+  <script>
+    const firstName = 'Antonia';
+    const lastName = 'Francesca';
+    function fullNameDeclaration(first, last) { return `${first} ${last}`; }
+    const fullNameExpression = function(first, last) { return `${first} ${last}`; };
+    const fullNameArrow = (first, last) => `${first} ${last}`;
+    document.querySelector('#decl-output').textContent = fullNameDeclaration(firstName, lastName);
+    document.querySelector('#expr-output').textContent = fullNameExpression('Blessing', 'Dewheret');
+    document.querySelector('#arrow-output').textContent = fullNameArrow('Jorge', 'Svetlana');
+  </script>
+</body>
+</html>

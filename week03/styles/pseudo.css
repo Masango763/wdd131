@@ -1,0 +1,66 @@
+:root {
+    --bord: 1px solid #777777;
+    --navy: #0f172a;
+    --purple: #7c3aed;
+    --light-gray: #f1f5f9;
+    --dark-gray: #cbd5e1;
+}
+body {
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+    background-color: #f8fafc;
+}
+main {
+    max-width: 700px;
+    margin: 0 auto;
+}
+hr {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+}
+a:link, a:visited {
+    color: var(--navy);
+    text-decoration: underline;
+}
+a:hover {
+    color: var(--purple);
+}
+.datatable {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-left: var(--bord);
+    border-bottom: var(--bord);
+}
+.row {
+    display: flex;
+    width: 100%;
+}
+.row.header {
+    font-weight: bold;
+    background-color: #e2e8f0;
+}
+.col {
+    flex: 1;
+    padding: 0.75rem;
+    border-top: var(--bord);
+    border-right: var(--bord);
+}
+.row:last-child {
+    background-color: var(--dark-gray);
+}
+.checkmark-list {
+    margin-top: 1.5rem;
+    padding-left: 2rem;
+}
+.checkmark-list li {
+    padding-left: 0.5rem;
+    margin-bottom: 1rem;
+}
+.checkmark-list li::marker {
+    content: "✔ ";
+    color: var(--navy);
+    font-size: 2rem;
+}

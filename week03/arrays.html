@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WDD 131 – Week 03 Learning Activity practicing JavaScript array syntax.">
+  <meta name="author" content="Masango Dewheretsoko">
+  <title>WDD 131 – JavaScript Arrays Sandbox</title>
+  <style>
+    body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 600px; margin: 2rem auto; padding: 0 1rem; background-color: #f8fafc; color: #0f172a; }
+    .instruction-box { background: #e2e8f0; padding: 1rem; border-radius: 6px; border-left: 4px solid #0284c7; margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Arrays Sandbox</h1>
+  <p>Open your browser's developer tools console to see the array operations logging live!</p>
+  <div class="instruction-box">
+    <strong>To view the output:</strong> Right-click anywhere on this page, choose <strong>Inspect</strong>, and navigate to the <strong>Console</strong> tab.
+  </div>
+  <script>
+    let names = ['Nancy', 'Blessing', 'Jorge', 'Svetlana'];
+    console.log("Original Array:", names);
+    console.log("Element at index 2:", names[2]);
+    console.log("Total array length:", names.length);
+    names.push('Sally');
+    console.log("After push('Sally'):", names);
+    names.pop();
+    console.log("After pop():", names);
+    names.forEach((name, index) => {
+      console.log(`Index ${index} contains name: ${name}`);
+    });
+  </script>
+</body>
+</html>

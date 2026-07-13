@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zimbabwe - Country Portal</title>
+    <meta name="description" content="WDD 131 assignment detailing data profile and weather criteria for Zimbabwe.">
+    <link rel="stylesheet" href="styles/place.css">
+    <script src="scripts/place.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Zimbabwe</h1>
+    </header>
+
+    <main>
+        <div class="hero-container">
+            <picture>
+                <source media="(min-width: 1000px)" srcset="week03/images/hero-large.webp">
+                <source media="(min-width: 500px)" srcset="week03/images/hero-medium.webp">
+                <img src="week03/images/hero-small.webp" alt="Zimbabwe Scenic Landscape" loading="lazy">
+            </picture>
+        </div>
+
+        <section class="card profile-card">
+            <h2>Data Profile</h2>
+            <ul>
+                <li><span>Capital:</span> Harare</li>
+                <li><span>Population:</span> 16.3 Million</li>
+                <li><span>Language:</span> English, Shona, Ndebele</li>
+                <li><span>Currency:</span> US Dollar / ZiG</li>
+                <li><span>Climate:</span> Subtropical</li>
+            </ul>
+        </section>
+
+        <section class="card weather-card">
+            <h2 class="weather-heading">Weather </h2>
+            <div class="weather-content">
+                <!-- Mobile Only Inline SVG Icon -->
+                <div class="mobile-weather-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                        <path fill="#eab308" d="M12 18a6 6 0 1 1 0-12a6 6 0 0 1 0 12z"/>
+                    </svg>
+                </div>
+                <ul>
+                    <li><span>Temperature:</span> <span id="temperature">9</span> °C</li>
+                    <li><span>Conditions:</span> Clear</li>
+                    <li><span>Wind:</span> <span id="windspeed">14</span> km/h</li>
+                    <li><span>Wind Chill:</span> <span id="windchill"></span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentyear"></span> | Masango Dewheretsoko | Zimbabwe</p>
+        <p class="last-modified">Last Modified: <span id="lastModified"></span></p>
+    </footer>
+</body>
+</html>

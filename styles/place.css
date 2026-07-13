@@ -1,0 +1,186 @@
+/* ==========================================
+   GLOBAL VARIABLES & RESET
+   ========================================== */
+:root {
+    --primary-color: #008751;   /* Zimbabwe Flag Green */
+    --accent-color: #ffca00;    /* Zimbabwe Flag Gold */
+    --dark-neutral: #111111;    /* Clean charcoal for high contrast text */
+    --light-neutral: #f9f9f9;   /* Soft off-white for content cards */
+    --border-color: #e0e0e0;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --max-width: 1200px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--dark-neutral);
+    background-color: #ffffff;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+header {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 5px solid var(--accent-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   MAIN CONTENT LAYOUT (MOBILE FIRST)
+   ========================================== */
+main {
+    flex: 1;
+    padding: 1rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Hero Picture Wrapper */
+.hero-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.hero-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    max-height: 450px;
+}
+
+/* Card General Styling */
+.card {
+    background-color: var(--light-neutral);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.card h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+/* Shared Lists Formatting */
+.card ul {
+    list-style: none;
+}
+
+.card ul li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card ul li:last-child {
+    border-bottom: none;
+}
+
+.card ul li span:first-child {
+    font-weight: 600;
+    color: #444444;
+}
+
+/* Mobile Weather Icon Alignment */
+.mobile-weather-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+footer {
+    background-color: var(--dark-neutral);
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    font-size: 0.95rem;
+    border-top: 4px solid var(--primary-color);
+}
+
+footer p {
+    margin: 0.4rem 0;
+}
+
+.last-modified {
+    color: var(--accent-color);
+}
+
+/* ==========================================
+   RESPONSIVE LAYOUT (DESKTOP WIDE VIEW)
+   ========================================== */
+@media (min-width: 800px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "hero hero"
+            "profile weather";
+        column-gap: 2rem;
+        row-gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .hero-container {
+        grid-area: hero;
+    }
+
+    .profile-card {
+        grid-area: profile;
+    }
+
+    .weather-card {
+        grid-area: weather;
+    }
+
+    /* Hide the mobile standalone SVG weather block */
+    .mobile-weather-icon {
+        display: none;
+    }
+
+    /* Requirement: Inject an emoticon dynamically next to the Weather heading */
+    .weather-heading::after {
+        content: " ⛅";
+        font-size: 1.4rem;
+        vertical-align: middle;
+    }
+}

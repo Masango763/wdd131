@@ -53,7 +53,7 @@ const temples = [
     location: "Harare, Zimbabwe",
     dedicated: "2026, March, 1",
     area: 17250,
-    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/harare-zimbabwe-temple/harare-zimbabwe-temple-51101-main.jpg"
+    imageUrl: "images/harare.jpg"
   },
   {
     templeName: "Salt Lake Utah",
@@ -67,7 +67,7 @@ const temples = [
     location: "Johannesburg, South Africa",
     dedicated: "1985, August, 24",
     area: 19184,
-    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/johannesburg-south-africa-temple/johannesburg-south-africa-temple-4359-main.jpg"
+    imageUrl: "images/johannesburg.jpg"
   }
 ];
 
@@ -85,7 +85,7 @@ function createTempleCards(filteredTemples) {
       <p><span class="label">Location:</span> ${temple.location}</p>
       <p><span class="label">Dedicated:</span> ${temple.dedicated}</p>
       <p><span class="label">Size:</span> ${temple.area.toLocaleString()} sq ft</p>
-      <img src="${temple.imageUrl}" alt="${temple.templeName} Temple" loading="lazy" width="400" height="250">
+      <img src="${temple.imageUrl}" alt="${temple.templeName} Temple" loading="lazy" width="400" height="250" referrerpolicy="no-referrer">
     `;
     container.appendChild(card);
   });

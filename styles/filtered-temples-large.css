@@ -7,7 +7,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 3rem;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
   }
 
   nav {
@@ -18,20 +23,25 @@
   .navigation {
     display: flex !important;
     flex-direction: row;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 0.5rem; /* Reduced spacing between items */
     background-color: transparent;
   }
 
   .navigation a {
     border-top: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem 0.85rem; /* Compact padding for neat structure */
+    font-size: 1rem;
     font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   .navigation a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
   }
 
   .res-grid, #temple-cards {

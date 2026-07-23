@@ -1,0 +1,203 @@
+/* Matching Game Script - Self-contained and reusable (now in match-game/ directory, formerly quizgame/) */
+// Original usage: <div class="match-game" data-src="../data/matching-sample.json" data-title="Vocabulary Match"></div>
+(function() {
+  const SELECTOR = '.match-game';
+  function qs(root, sel) { return root.querySelector(sel); }
+  function qsa(root, sel) { return Array.from(root.querySelectorAll(sel)); }
+  function shuffle(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random()* (i+1)); [array[i], array[j]] = [array[j], array[i]]; } return array; }
+  function formatDuration(ms) { const s = Math.floor(ms/1000); const m = Math.floor(s/60).toString().padStart(2,'0'); const sec = (s%60).toString().padStart(2,'0'); return `${m}:${sec}`; }
+  function buildTiles(data, termKey, defKey) { const tiles=[]; data.forEach((item,idx)=>{ const termVal=item[termKey]; const defVal=item[defKey]; tiles.push({pairId:idx,type:'term',text:termVal}); tiles.push({pairId:idx,type:'definition',text:defVal}); }); return shuffle(tiles); }
+  function buildSplitTileSets(data, termKey, defKey) { const terms=[],defs=[]; data.forEach((item,idx)=>{ const termVal=item[termKey]; const defVal=item[defKey]; terms.push({pairId:idx,type:'term',text:termVal}); defs.push({pairId:idx,type:'definition',text:defVal}); }); return {terms:shuffle(terms), defs:shuffle(defs)}; }
+  function initContainer(container){
+    container.innerHTML='';
+    container.classList.add('mg-inactive');
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='mg-play-btn';
+    // Title candidate (prefer explicit title, then layout title, then fallback)
+    const titleAttr=container.getAttribute('data-title');
+    const layoutTitle=(container._mgLayoutConfig && container._mgLayoutConfig.title) ? String(container._mgLayoutConfig.title).trim() : '';
+    const titleCandidate=(titleAttr && titleAttr.trim()) || layoutTitle || 'Matching Game';
+    // Unified play button label precedence:
+    // 1. data-label-playbutton
+    // 2. layout.labelPlayButton
+    // 3. default: `Play ${titleCandidate}`
+    const playButtonAttr=container.getAttribute('data-label-playbutton');
+    const layoutPlayButton=(container._mgLayoutConfig && container._mgLayoutConfig.labelPlayButton) ? String(container._mgLayoutConfig.labelPlayButton).trim() : '';
+    const playText = (playButtonAttr && playButtonAttr.trim()) ? playButtonAttr.trim()
+      : (layoutPlayButton || `Play ${titleCandidate}`);
+    btn.textContent=playText;
+    btn.addEventListener('click',()=>startGame(container));
+    container.appendChild(btn);
+  }
+  async function startGame(container){
+    if(container._mgState && container._mgState.active) return;
+    container.classList.remove('mg-inactive');
+    const attrDisplay=container.getAttribute('data-display');
+    const initialDisplay=(attrDisplay||'fullscreen').toLowerCase();
+    container.classList.remove('mg-fullscreen','mg-inline','mg-modal');
+    removeBackdrop(container);
+    applyDisplayMode(container, initialDisplay);
+    const src=container.getAttribute('data-src');
+  const attrTitle=container.getAttribute('data-title');
+    const debugAttr=container.getAttribute('data-debug');
+    const debugExplicit=debugAttr && /^(1|true|yes|on)$/i.test(debugAttr.trim());
+    container.innerHTML='<p>Loading...</p>';
+    try {
+      const resp=await fetch(src,{cache:'no-cache'});
+      if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const raw=await resp.json();
+      const layoutConfig=(raw && !Array.isArray(raw) && typeof raw.layout==='object')? raw.layout : {};
+      const items=Array.isArray(raw)? raw : (Array.isArray(raw.data)? raw.data : (Array.isArray(raw.items)? raw.items : []));
+      if(!Array.isArray(items) || items.length===0) throw new Error('Dataset is empty or invalid');
+      const debug = debugExplicit || !!layoutConfig.debug;
+      container._mgDebug = debug;
+      if(!attrDisplay && layoutConfig.display){
+        container.classList.remove('mg-fullscreen','mg-inline','mg-modal');
+        removeBackdrop(container);
+        applyDisplayMode(container, String(layoutConfig.display).toLowerCase());
+        if(debug) console.info('[match-game] display mode derived from layout config:', layoutConfig.display);
+      }
+  const title = attrTitle || layoutConfig.title || 'Matching Game';
+      if(debug){
+        console.info('[match-game] dataset loaded', { count: items.length });
+        if(layoutConfig && Object.keys(layoutConfig).length){ console.info('[match-game] layout config keys:', Object.keys(layoutConfig)); }
+      }
+      container._mgLayoutConfig=layoutConfig;
+      setupGameplay(container,{ items, layoutConfig }, title);
+    } catch(err){
+      container.innerHTML=`<div class="callout error"><p><strong>Error:</strong> Failed to load data: ${err.message}</p></div>`;
+      const close=document.createElement('button');
+      close.className='mg-action-btn';
+      close.textContent='Close';
+      close.addEventListener('click',()=>closeGame(container));
+      container.appendChild(close);
+    }
+  }
+  function applyDisplayMode(container, mode){
+    if(mode==='inline') container.classList.add('mg-inline');
+    else if(mode==='modal'){ container.classList.add('mg-modal'); ensureBackdrop(container);} else container.classList.add('mg-fullscreen');
+  }
+  function setupGameplay(container, payload, title){
+    const { items: rawData, layoutConfig={} } = payload || { items: [] };
+    // Defensive dataset validation
+    if(!Array.isArray(rawData)){
+      console.warn('[match-game] rawData not an array; aborting setup');
+      container.innerHTML='<div class="callout error"><p><strong>Error:</strong> Invalid dataset format.</p></div>';
+      return;
+    }
+    function choose(attrName, key, fallback){
+      const attrVal=container.getAttribute(attrName); if(attrVal && attrVal.trim()) return attrVal.trim();
+      const cfgVal=layoutConfig[key]; if(cfgVal!==undefined && String(cfgVal).trim()) return String(cfgVal).trim();
+      return fallback;
+    }
+  const layoutMode=choose('data-layout','layout','');
+  const modeLower=layoutMode.toLowerCase();
+  const usingSplit=(modeLower==='split' || modeLower==='split-narrow');
+    const termKey=choose('data-term-prop','termProp','term');
+    const defKey=choose('data-def-prop','defProp','definition');
+    const timeLabel=choose('data-label-time','labelTime','Time');
+    const matchedLabel=choose('data-label-matched','labelMatched','Matched');
+    const closeLabel=choose('data-label-close','labelClose','Close');
+    const termsLabel=choose('data-label-terms','labelTerms','Terms');
+    const definitionsLabel=choose('data-label-definitions','labelDefinitions','Definitions');
+    const tiles=usingSplit?[]:buildTiles(rawData, termKey, defKey);
+    const splitSets=usingSplit?buildSplitTileSets(rawData, termKey, defKey):null;
+    if(container._mgState && container._mgState.timerId){ clearInterval(container._mgState.timerId);} 
+    const state={ tiles, selections:[], matchedPairs:0, totalPairs:rawData.length, startTime:performance.now(), timerId:null, busy:false, active:true, termKey, defKey };
+    container._mgState=state;
+    // Duplicate detection (warn only)
+    detectDuplicates(rawData, termKey, defKey, container._mgDebug);
+    container.innerHTML='';
+    container.setAttribute('role','application');
+    container.setAttribute('aria-label', `${title} - find all matching pairs`);
+    const header=document.createElement('div');
+    header.className='mg-header';
+    header.innerHTML=`<h2 class="mg-title">${escapeHTML(title)}</h2><div class="mg-status">${escapeHTML(timeLabel)}: <span class="mg-timer" aria-live="polite">00:00</span> | ${escapeHTML(matchedLabel)}: <span class="mg-matched">0</span>/<span class="mg-total">${state.totalPairs}</span></div><button type="button" class="mg-action-btn mg-exit-btn" title="Exit game (Esc)">${escapeHTML(closeLabel)}</button>`;
+    container.appendChild(header);
+    const live=document.createElement('div');
+    live.className='mg-sr-only';
+    live.setAttribute('aria-live','polite');
+    container.appendChild(live);
+    if(usingSplit){
+      container.classList.add('mg-split');
+      if(modeLower==='split-narrow') container.classList.add('mg-split-narrow');
+      const columns=document.createElement('div');
+      columns.className='mg-columns';
+      const leftCol=document.createElement('div');
+      const rightCol=document.createElement('div');
+  const leftHeader=document.createElement('h3');
+  leftHeader.className='mg-col-header'; leftHeader.textContent=termsLabel;
+  const rightHeader=document.createElement('h3');
+  rightHeader.className='mg-col-header'; rightHeader.textContent=definitionsLabel;
+      const leftGrid=document.createElement('div'); leftGrid.className='mg-grid mg-grid-terms';
+      const rightGrid=document.createElement('div'); rightGrid.className='mg-grid mg-grid-defs';
+      leftCol.appendChild(leftHeader); leftCol.appendChild(leftGrid);
+      rightCol.appendChild(rightHeader); rightCol.appendChild(rightGrid);
+      columns.appendChild(leftCol); columns.appendChild(rightCol);
+      container.appendChild(columns);
+      splitSets.terms.forEach((tile,i)=>{ leftGrid.appendChild(buildTileButton(tile,i,state,container)); });
+      splitSets.defs.forEach((tile,i)=>{ rightGrid.appendChild(buildTileButton(tile,'d'+i,state,container)); });
+    } else {
+      const grid=document.createElement('div'); grid.className='mg-grid'; container.appendChild(grid);
+      tiles.forEach((tile,i)=>{ grid.appendChild(buildTileButton(tile,i,state,container)); });
+    }
+    qs(container,'.mg-exit-btn').addEventListener('click',()=>closeGame(container));
+    document.addEventListener('keydown', escHandler);
+    function escHandler(e){ if(e.key==='Escape'){ closeGame(container); document.removeEventListener('keydown', escHandler);} }
+    state.timerId=setInterval(()=>{ if(!state.active) return; const elapsed=performance.now()-state.startTime; const timerEl=qs(container,'.mg-timer'); if(timerEl) timerEl.textContent=formatDuration(elapsed); },500);
+  }
+  function onTileClick(btn,state,container){ if(state.busy||btn.disabled||state.selections.includes(btn)) return; btn.classList.add('mg-selected'); state.selections.push(btn); if(state.selections.length===2){ const [a,b]=state.selections; state.busy=true; const isMatch=a.dataset.pair===b.dataset.pair && a.dataset.type!==b.dataset.type; if(isMatch){ a.classList.add('mg-match'); b.classList.add('mg-match'); setTimeout(()=>{ a.disabled=true; b.disabled=true; state.matchedPairs++; qs(container,'.mg-matched').textContent=state.matchedPairs; announce(container,'Match found'); state.selections=[]; if(state.matchedPairs===state.totalPairs){ endGame(container,state);} else { state.busy=false;} },350); } else { a.classList.add('mg-mismatch'); b.classList.add('mg-mismatch'); setTimeout(()=>{ a.classList.remove('mg-selected','mg-mismatch'); b.classList.remove('mg-selected','mg-mismatch'); state.selections=[]; state.busy=false; },900); } }}
+  function buildTileButton(tile,index,state,container){ const btn=document.createElement('button'); btn.type='button'; btn.className='mg-tile'; btn.dataset.index=index; btn.dataset.pair=tile.pairId; btn.dataset.type=tile.type; btn.dataset.text=tile.text; btn.setAttribute('aria-label', `${tile.type==='term'?'Term':'Definition'} tile`); btn.innerHTML=`<span>${escapeHTML(tile.text)}</span>`; btn.addEventListener('click',()=>onTileClick(btn,state,container)); return btn; }
+  function endGame(container,state){
+    clearInterval(state.timerId); state.active=false;
+    const elapsed=performance.now()-state.startTime;
+    // Reuse customized close label if present
+    const closeLabelAttr=container.getAttribute('data-label-close');
+    const closeLabel=(closeLabelAttr && closeLabelAttr.trim())? closeLabelAttr.trim() : 'Close';
+    const overlay=document.createElement('div');
+    overlay.className='mg-message-overlay';
+  overlay.innerHTML=`<h3>All Matches Completed!</h3><p>You finished in <strong>${formatDuration(elapsed)}</strong>.</p><div class="mg-actions"><button type="button" class="mg-action-btn mg-replay">Play Again</button><button type="button" class="mg-action-btn mg-close">${escapeHTML(closeLabel)}</button></div>`;
+    container.appendChild(overlay);
+    qs(overlay,'.mg-replay').addEventListener('click',()=>{ startGame(container); });
+    qs(overlay,'.mg-close').addEventListener('click',()=>closeGame(container));
+  }
+  function closeGame(container){ container.classList.remove('mg-fullscreen','mg-inline','mg-modal'); container.style.top=''; removeBackdrop(container); if(container._mgState && container._mgState.timerId){ clearInterval(container._mgState.timerId); container._mgState.active=false; } initContainer(container); }
+  function ensureBackdrop(container){
+    const header=document.querySelector('header');
+    const headerHeight=header?header.offsetHeight:0;
+    const backdrop=document.createElement('div');
+    backdrop.className='mg-backdrop';
+    backdrop.style.top=headerHeight+'px';
+    container.style.top=(headerHeight+16)+'px';
+    // Previously clicking the backdrop closed the game. This was removed to prevent accidental closure.
+    // Intentional no-op click handler to stop propagation without closing.
+    backdrop.addEventListener('click', e=>{ e.stopPropagation(); });
+    document.body.appendChild(backdrop);
+    container._mgBackdrop=backdrop;
+  }
+  function removeBackdrop(container){ if(container._mgBackdrop){ container._mgBackdrop.remove(); delete container._mgBackdrop; } }
+  function announce(container,msg){ const live=qs(container,'.mg-sr-only'); if(live) live.textContent=msg; }
+  function escapeHTML(str){ return str.replace(/[&<>"]|'|/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
+    function escapeHTML(str){ return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
+  function detectDuplicates(items, termKey, defKey, debug){
+    try{
+      const termMap=new Map();
+      const defMap=new Map();
+      for(const it of items){
+        const t=(it && it[termKey])? String(it[termKey]).trim():'';
+        const d=(it && it[defKey])? String(it[defKey]).trim():'';
+        if(t) termMap.set(t,(termMap.get(t)||0)+1);
+        if(d) defMap.set(d,(defMap.get(d)||0)+1);
+      }
+      const dupTerms=[...termMap.entries()].filter(e=>e[1]>1).map(e=>e[0]);
+      const dupDefs=[...defMap.entries()].filter(e=>e[1]>1).map(e=>e[0]);
+      if(debug && (dupTerms.length||dupDefs.length)){
+        if(dupTerms.length) console.warn('[match-game] duplicate terms detected:', dupTerms);
+        if(dupDefs.length) console.warn('[match-game] duplicate definitions detected:', dupDefs);
+      }
+    }catch(err){ if(debug) console.warn('[match-game] duplicate detection failed', err); }
+  }
+  function enhance(){ qsa(document, SELECTOR).forEach(container=>{ if(!container.getAttribute('data-src')){ container.innerHTML='<div class="callout error"><p><strong>Error:</strong> Missing data-src attribute for match game.</p></div>'; return;} initContainer(container); }); }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', enhance);} else { enhance(); }
+})();

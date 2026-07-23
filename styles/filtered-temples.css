@@ -1,0 +1,136 @@
+:root {
+  --primary-color: #003366;
+  --secondary-color: #f4f4f4;
+  --accent-color: #cc9900;
+  --card-bg: #ffffff;
+  --font-family: 'Roboto', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  background-color: var(--secondary-color);
+  color: #333;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Hamburger Menu Button */
+#menu {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+#menu::before {
+  content: "☰";
+}
+
+#menu.open::before {
+  content: "✕";
+}
+
+.navigation {
+  display: none;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+.navigation.open {
+  display: flex;
+}
+
+.navigation a {
+  color: #fff;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.navigation a:hover,
+.navigation a.active {
+  background-color: var(--accent-color);
+  color: #000;
+  font-weight: bold;
+}
+
+/* Main Container */
+main {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+main h2 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Cards Grid */
+.res-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* Temple Card Styling */
+figure {
+  background-color: var(--card-bg);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+figure h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+figure p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+figure img {
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-top: 0.75rem;
+  background-color: #eee;
+}
+
+/* Footer */
+footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}

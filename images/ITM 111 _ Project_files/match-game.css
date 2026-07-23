@@ -1,0 +1,203 @@
+/* (Relocated) Matching Game Styles now in match-game/ (formerly quizgame/) */
+/* Original path: docs/styles/match-game.css */
+/* Matching Game Styles (self-contained) */
+.match-game {
+  border: 1px solid rgba(0 0 0 / 15%);
+  padding: 1rem;
+  background: var(--lightgray, #f4f4f4);
+  font-family: Montserrat, Helvetica, sans-serif;
+  position: relative;
+  min-height: 200px;
+}
+
+/* Compact initial (pre-play) state */
+.match-game.mg-inactive {
+  display: inline-block;
+  padding: 0; /* remove extra space */
+  background: transparent;
+  border: none;
+  min-height: 0;
+}
+
+.match-game.mg-inactive .mg-play-btn { margin: 0; }
+
+.match-game button.mg-play-btn,
+.match-game button.mg-action-btn {
+  font: 600 1rem/1.2 Montserrat, Helvetica, sans-serif;
+  background: var(--byuiblue, #006eb6);
+  color: #fff;
+  border: none;
+  padding: .75rem 1.25rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.match-game button.mg-play-btn:hover,
+.match-game button.mg-action-btn:hover {
+  background: #004f80;
+}
+
+.match-game.mg-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  margin: 0;
+  max-width: none;
+  width: 100%; /* avoid 100vw scrollbar induced horizontal clipping */
+  height: 100vh;
+  overflow: auto;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+/* Inline (embedded) mode: fills parent width, natural height */
+.match-game.mg-inline {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: .75rem 1rem 1rem;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* In inline mode, allow page to scroll normally */
+.match-game.mg-inline .mg-header { position: static; }
+
+/* Modal mode: centered panel below site header (header remains visible) */
+.match-game.mg-modal {
+  position: fixed;
+  z-index: 10001; /* above backdrop */
+  left: 50%;
+  top: 4rem; /* will be overridden inline with actual header height */
+  transform: translateX(-50%);
+  width: min(1000px, 92%);
+  max-height: calc(100vh - 2rem); /* keep within viewport */
+  overflow: auto;
+  background: #fff;
+  box-shadow: 0 6px 24px -2px rgba(0 0 0 / 30%);
+  border: 1px solid rgba(0 0 0 / 18%);
+  border-radius: 10px;
+  padding: 1rem 1.25rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.mg-backdrop {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 4rem; /* adjusted dynamically to header height */
+  background: linear-gradient(rgba(0 0 0 / 35%), rgba(0 0 0 / 55%));
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 10000;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .match-game.mg-modal { animation: mg-pop .28s ease-out; }
+  @keyframes mg-pop { from { opacity: 0; transform: translate(-50%, -8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+}
+
+.mg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: .5rem;
+}
+
+.mg-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.mg-status { font-size: .9rem; }
+.mg-timer {
+  font-weight: 700;
+  font-family: "Courier New", Courier, monospace;
+  font-variant-numeric: tabular-nums; /* Align digits if font supports */
+  display: inline-block;
+  width: 5ch; /* mm:ss fixed space */
+  text-align: right;
+}
+
+.mg-grid {
+  display: grid;
+  gap: .75rem;
+  width: 100%;
+  margin: .5rem auto 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+/* Split (two-column) layout */
+.match-game.mg-split .mg-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  width: 100%;
+  margin: .75rem 0 1rem;
+}
+
+/* Narrow split variant: terms 1/3, definitions 2/3 */
+.match-game.mg-split.mg-split-narrow .mg-columns {
+  grid-template-columns: 1fr 2fr;
+}
+
+.match-game.mg-split .mg-col-header {
+  font-size: .9rem;
+  font-weight: 600;
+  margin: 0 0 .25rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--navy, #000080);
+}
+
+/* Within each half, keep tile sizing similar to unified layout (multiple columns) */
+.match-game.mg-split .mg-grid {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin: 0;
+  align-content: start;
+}
+
+.mg-message-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255 255 255 / 92%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.mg-actions { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
+
+.mg-tile {
+  position: relative;
+  min-height: 90px;
+  background: #fff;
+  border: 2px solid var(--byuiblue, #006eb6);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: .5rem;
+  font: 500 .85rem/1.15 Montserrat, Helvetica, sans-serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .25s, border-color .25s, transform .2s;
+}
+.mg-tile[disabled] { cursor: default; }
+.mg-tile.mg-selected { outline: 3px solid #ffb100; outline-offset: 2px; }
+.mg-tile.mg-match { background: #d6f8d6; border-color: #2a8a2a; position: relative; }
+.mg-tile.mg-match::after { content: '✓'; position: absolute; top: 4px; right: 6px; font-size: .9rem; color: #2a8a2a; }
+.mg-tile.mg-mismatch { background: #ffe5e5; border-color: #c40000; }

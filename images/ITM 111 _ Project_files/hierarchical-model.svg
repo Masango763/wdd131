@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="220mm"
+   height="115mm"
+   viewBox="0 0 220 115"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="hierarchical-model.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.6507506"
+     inkscape:cx="386.18796"
+     inkscape:cy="551.56727"
+     inkscape:window-width="3840"
+     inkscape:window-height="2071"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-3.0532151,-2.6093707)">
+    <text
+       fill="#215f9a"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="12.7px"
+       id="text1"
+       x="60.445576"
+       y="20.34494"
+       style="stroke-width:0.264583">Hierarchical Model</text>
+    <path
+       d="m 141.58314,33.706398 c 1.4613,0 2.64584,1.18454 2.64584,2.645834 v 7.408333 c 0,1.461294 -1.18454,2.645833 -2.64584,2.645833 H 83.374809 c -1.461294,0 -2.645833,-1.184539 -2.645833,-2.645833 v -7.408333 c 0,-1.461294 1.184539,-2.645834 2.645833,-2.645834 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path1"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text2"
+       x="87.260742"
+       y="41.511608"
+       style="stroke-width:0.264583">Pavement Improvement</text>
+    <path
+       d="m 71.733143,62.810565 c 1.461293,0 2.645833,1.184539 2.645833,2.645833 v 7.408333 c 0,1.461294 -1.18454,2.645833 -2.645833,2.645833 H 13.52481 c -1.461294,0 -2.645833,-1.184539 -2.645833,-2.645833 v -7.408333 c 0,-1.461294 1.184539,-2.645833 2.645833,-2.645833 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path2"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text3"
+       x="26.813507"
+       y="70.615776"
+       style="stroke-width:0.264583">Reconstruction</text>
+    <path
+       d="m 141.58314,62.545981 c 1.4613,0 2.64584,1.18454 2.64584,2.645834 v 7.408333 c 0,1.461294 -1.18454,2.645833 -2.64584,2.645833 H 83.374809 c -1.461294,0 -2.645833,-1.184539 -2.645833,-2.645833 v -7.408333 c 0,-1.461294 1.184539,-2.645834 2.645833,-2.645834 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path3"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text4"
+       x="98.77964"
+       y="70.351189"
+       style="stroke-width:0.264583">Maintenance</text>
+    <path
+       d="m 211.43314,62.281398 c 1.4605,0 2.64583,1.18454 2.64583,2.645833 v 7.408333 c 0,1.461294 -1.18533,2.645834 -2.64583,2.645834 h -58.20833 c -1.4613,0 -2.64583,-1.18454 -2.64583,-2.645834 v -7.408333 c 0,-1.461293 1.18453,-2.645833 2.64583,-2.645833 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path4"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text5"
+       x="167.80652"
+       y="70.086609"
+       style="stroke-width:0.264583">Rehabilitation</text>
+    <path
+       d="m 71.733143,94.295981 c 1.461293,0 2.645833,1.184539 2.645833,2.645833 v 7.408336 c 0,1.46129 -1.18454,2.64583 -2.645833,2.64583 H 13.52481 c -1.461294,0 -2.645833,-1.18454 -2.645833,-2.64583 v -7.408336 c 0,-1.461294 1.184539,-2.645833 2.645833,-2.645833 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path5"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text6"
+       x="34.401493"
+       y="102.10119"
+       style="stroke-width:0.264583">Routine</text>
+    <path
+       d="m 141.58314,94.295981 c 1.4613,0 2.64584,1.184539 2.64584,2.645833 v 7.408336 c 0,1.46129 -1.18454,2.64583 -2.64584,2.64583 H 83.374809 c -1.461294,0 -2.645833,-1.18454 -2.645833,-2.64583 v -7.408336 c 0,-1.461294 1.184539,-2.645833 2.645833,-2.645833 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path6"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text7"
+       x="101.71784"
+       y="102.10119"
+       style="stroke-width:0.264583">Corrective</text>
+    <path
+       d="m 211.43314,94.295981 c 1.4605,0 2.64583,1.184539 2.64583,2.645833 v 7.408336 c 0,1.46129 -1.18533,2.64583 -2.64583,2.64583 h -58.20833 c -1.4613,0 -2.64583,-1.18454 -2.64583,-2.64583 v -7.408336 c 0,-1.461294 1.18453,-2.645833 2.64583,-2.645833 z"
+       stroke="#000000"
+       stroke-miterlimit="8"
+       fill="#ffffff"
+       fill-rule="evenodd"
+       id="path7"
+       style="stroke-width:0.264583" />
+    <text
+       fill="#111111"
+       font-family="'Segoe UI', 'Segoe UI_MSFontService', sans-serif"
+       font-weight="400"
+       font-size="4.7625px"
+       id="text8"
+       x="171.33076"
+       y="102.10119"
+       style="stroke-width:0.264583">Preventive</text>
+    <path
+       d="m 110.94411,46.029596 -37.81423,15.634026 0.202141,0.489029 37.814269,-15.634035 z m -37.791476,14.765716 -1.551781,1.786758 2.360612,0.169307 z"
+       id="path8"
+       style="stroke-width:0.264583" />
+    <path
+       d="m 111.28835,46.274106 v 14.191192 h -0.52917 V 46.274106 Z m 0.79375,13.838502 -1.05833,2.116667 -1.05834,-2.116667 z"
+       id="path9"
+       style="stroke-width:0.264583" />
+    <path
+       d="m 111.11743,46.026721 40.46326,15.330223 -0.18759,0.494771 -40.463,-15.330223 z m 40.41457,14.462919 1.60444,1.739635 -2.35426,0.239713 z"
+       id="path10"
+       style="stroke-width:0.264583" />
+    <path
+       d="m 112.26787,74.873681 -39.178471,18.17762 0.222779,0.480007 39.178412,-18.177611 z m -39.192494,17.309125 -1.474523,1.850893 2.365375,0.06916 z"
+       id="path11"
+       style="stroke-width:0.264583" />
+    <path
+       d="M 112.61127,75.378273 V 92.382514 H 112.0821 V 75.378273 Z m 0.79375,16.651287 -1.05834,2.116667 -1.05833,-2.116667 z"
+       id="path12"
+       style="stroke-width:0.264583" />
+    <path
+       d="m 112.45781,74.873448 39.17738,18.120518 -0.22198,0.480219 -39.17765,-18.120254 z m 39.19061,17.251891 1.47664,1.849173 -2.36537,0.07197 z"
+       id="path13"
+       style="stroke-width:0.264583" />
+  </g>
+</svg>

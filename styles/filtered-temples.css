@@ -28,7 +28,6 @@ header h1 {
   font-size: 1.5rem;
 }
 
-/* Hamburger Menu Button */
 #menu {
   background: none;
   border: none;
@@ -43,6 +42,10 @@ header h1 {
 
 #menu.open::before {
   content: "✕";
+}
+
+nav {
+  display: flex;
 }
 
 .navigation {
@@ -71,7 +74,6 @@ header h1 {
   font-weight: bold;
 }
 
-/* Main Container */
 main {
   max-width: 1200px;
   margin: 1.5rem auto;
@@ -84,14 +86,12 @@ main h2 {
   margin-bottom: 1.5rem;
 }
 
-/* Responsive Cards Grid */
 .res-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
-/* Temple Card Styling */
 figure {
   background-color: var(--card-bg);
   border: 1px solid #ddd;
@@ -126,7 +126,6 @@ figure img {
   background-color: #eee;
 }
 
-/* Footer */
 footer {
   background-color: var(--primary-color);
   color: #fff;

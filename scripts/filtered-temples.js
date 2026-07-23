@@ -85,7 +85,7 @@ function createTempleCards(filteredTemples) {
       <p><span class="label">Location:</span> ${temple.location}</p>
       <p><span class="label">Dedicated:</span> ${temple.dedicated}</p>
       <p><span class="label">Size:</span> ${temple.area.toLocaleString()} sq ft</p>
-      <img src="${temple.imageUrl}" alt="${temple.templeName} Temple" loading="lazy" width="400" height="250" referrerpolicy="no-referrer">
+      <img src="${temple.imageUrl}" alt="${temple.templeName} Temple" loading="lazy" width="400" height="250">
     `;
     container.appendChild(card);
   });

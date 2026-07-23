@@ -51,9 +51,9 @@ const temples = [
   {
     templeName: "Harare Zimbabwe",
     location: "Harare, Zimbabwe",
-    dedicated: "2022, December, 11",
+    dedicated: "2026, March, 1",
     area: 17250,
-    imageUrl: "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/harare-zimbabwe/400x250/harare_zimbabwe_temple_exterior.jpg"
+    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/harare-zimbabwe-temple/harare-zimbabwe-temple-51101-main.jpg"
   },
   {
     templeName: "Salt Lake Utah",
@@ -67,7 +67,7 @@ const temples = [
     location: "Johannesburg, South Africa",
     dedicated: "1985, August, 24",
     area: 19184,
-    imageUrl: "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/johannesburg-south-africa/400x250/johannesburg-south-africa-temple-1100021-wallpaper.jpg"
+    imageUrl: "https://churchofjesuschristtemples.org/assets/img/temples/johannesburg-south-africa-temple/johannesburg-south-africa-temple-4359-main.jpg"
   }
 ];
 

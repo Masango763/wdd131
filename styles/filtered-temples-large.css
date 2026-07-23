@@ -3,24 +3,40 @@
     display: none;
   }
 
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
   nav {
     display: flex !important;
+    align-items: center;
   }
 
   .navigation {
     display: flex !important;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 1.5rem;
     background-color: transparent;
   }
 
   .navigation a {
     border-top: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
   }
 
-  #temple-cards {
+  .navigation a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  .res-grid, #temple-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
 }

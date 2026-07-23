@@ -53,7 +53,7 @@ const temples = [
     location: "Harare, Zimbabwe",
     dedicated: "2026, March, 1",
     area: 17250,
-    imageUrl: "images/harare.jpg"
+    imageUrl: "images/harare-zimbabwe-temple.webp"
   },
   {
     templeName: "Salt Lake Utah",
@@ -67,7 +67,7 @@ const temples = [
     location: "Johannesburg, South Africa",
     dedicated: "1985, August, 24",
     area: 19184,
-    imageUrl: "images/johannesburg.jpg"
+    imageUrl: "images/johannesburg-temple.webp"
   }
 ];
 

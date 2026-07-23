@@ -1,24 +1,26 @@
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   #menu {
     display: none;
   }
 
-  header {
-    flex-direction: row;
+  nav {
+    display: flex !important;
   }
 
   .navigation {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
-    width: auto;
+    justify-content: space-around;
+    background-color: transparent;
   }
 
   .navigation a {
     border-top: none;
-    padding: 0.5rem 1rem;
   }
 
-  .res-grid {
+  #temple-cards {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
   }
 }

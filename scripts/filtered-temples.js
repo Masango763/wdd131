@@ -71,12 +71,13 @@ const temples = [
   }
 ];
 
-const container = document.querySelector("#temple-cards");
+const container = document.querySelector("#temple-cards") || document.querySelector(".res-grid");
 const filterTitle = document.querySelector("#filter-title");
 const menuButton = document.querySelector("#menu");
 const navigation = document.querySelector(".navigation");
 
 function createTempleCards(filteredTemples) {
+  if (!container) return;
   container.innerHTML = "";
   filteredTemples.forEach((temple) => {
     const card = document.createElement("figure");
@@ -95,46 +96,49 @@ function getYear(dedicatedString) {
   return parseInt(dedicatedString.split(",")[0].trim());
 }
 
-document.querySelector("#home").addEventListener("click", (e) => {
+document.querySelector("#home")?.addEventListener("click", (e) => {
   e.preventDefault();
-  filterTitle.textContent = "Home";
+  if (filterTitle) filterTitle.textContent = "Home";
   createTempleCards(temples);
 });
 
-document.querySelector("#old").addEventListener("click", (e) => {
+document.querySelector("#old")?.addEventListener("click", (e) => {
   e.preventDefault();
-  filterTitle.textContent = "Old Temples (Built before 1900)";
+  if (filterTitle) filterTitle.textContent = "Old Temples (Built before 1900)";
   const oldTemples = temples.filter((t) => getYear(t.dedicated) < 1900);
   createTempleCards(oldTemples);
 });
 
-document.querySelector("#new").addEventListener("click", (e) => {
+document.querySelector("#new")?.addEventListener("click", (e) => {
   e.preventDefault();
-  filterTitle.textContent = "New Temples (Built after 2000)";
+  if (filterTitle) filterTitle.textContent = "New Temples (Built after 2000)";
   const newTemples = temples.filter((t) => getYear(t.dedicated) > 2000);
   createTempleCards(newTemples);
 });
 
-document.querySelector("#large").addEventListener("click", (e) => {
+document.querySelector("#large")?.addEventListener("click", (e) => {
   e.preventDefault();
-  filterTitle.textContent = "Large Temples (Over 90,000 sq ft)";
+  if (filterTitle) filterTitle.textContent = "Large Temples (Over 90,000 sq ft)";
   const largeTemples = temples.filter((t) => t.area > 90000);
   createTempleCards(largeTemples);
 });
 
-document.querySelector("#small").addEventListener("click", (e) => {
+document.querySelector("#small")?.addEventListener("click", (e) => {
   e.preventDefault();
-  filterTitle.textContent = "Small Temples (Under 10,000 sq ft)";
+  if (filterTitle) filterTitle.textContent = "Small Temples (Under 10,000 sq ft)";
   const smallTemples = temples.filter((t) => t.area < 10000);
   createTempleCards(smallTemples);
 });
 
-menuButton.addEventListener("click", () => {
-  navigation.classList.toggle("open");
-  menuButton.classList.toggle("open");
+menuButton?.addEventListener("click", () => {
+  navigation?.classList.toggle("open");
+  menuButton?.classList.toggle("open");
 });
 
-document.querySelector("#currentyear").textContent = new Date().getFullYear();
-document.querySelector("#lastModified").textContent = `Last Modification: ${document.lastModified}`;
+const currentYearEl = document.querySelector("#currentyear");
+if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+
+const lastModEl = document.querySelector("#lastModified");
+if (lastModEl) lastModEl.textContent = `Last Modification: ${document.lastModified}`;
 
 createTempleCards(temples);

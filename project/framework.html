@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threat Library & Risk Calculator</title>
+  <meta name="description" content="Interactive cybersecurity risk calculator and threat catalog for ISPs.">
+  <meta name="author" content="Masango Dewheretsoko">
+  <link rel="stylesheet" href="styles/project.css">
+  <link rel="stylesheet" href="styles/project-large.css">
+  <script src="scripts/main.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>ISP Cyber Mitigation Hub</h1>
+    <button id="menu-btn" aria-label="Toggle Navigation"></button>
+    <nav class="navigation">
+      <a href="index.html">Home</a>
+      <a href="framework.html" class="active">Threat Library & Tool</a>
+      <a href="report.html">Report Incident</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Interactive Security Risk Calculator</h2>
+    <section class="calculator-card">
+      <form id="calc-form">
+        <label for="firewall">Firewall Protection Standard:</label>
+        <select id="firewall" required>
+          <option value="basic">Basic / Legacy</option>
+          <option value="ngfw">Next-Gen Firewall (NGFW)</option>
+        </select>
+
+        <label for="patching">Patch Management Cycle:</label>
+        <select id="patching" required>
+          <option value="monthly">Monthly / Delayed</option>
+          <option value="automated">Automated / Real-time</option>
+        </select>
+
+        <button type="submit">Calculate Risk Level</button>
+      </form>
+      <div id="calc-result"></div>
+    </section>
+
+    <h2>Threat Library</h2>
+    <div class="filter-controls">
+      <button id="filter-all">All Threats</button>
+      <button id="filter-high">High Severity</button>
+      <button id="filter-medium">Medium Severity</button>
+    </div>
+    <div id="threat-cards" class="card-grid"></div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="currentyear"></span> | ISP Cyber Mitigation Hub | Zimbabwe</p>
+    <p id="lastModified"></p>
+    <p><a href="references.html">References & Attributions</a></p>
+  </footer>
+</body>
+</html>

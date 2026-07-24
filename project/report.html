@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Incident</title>
+  <meta name="description" content="Report network intrusion or cybersecurity threats to the central repository.">
+  <meta name="author" content="Masango Dewheretsoko">
+  <link rel="stylesheet" href="styles/project.css">
+  <link rel="stylesheet" href="styles/project-large.css">
+  <script src="scripts/main.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>ISP Cyber Mitigation Hub</h1>
+    <button id="menu-btn" aria-label="Toggle Navigation"></button>
+    <nav class="navigation">
+      <a href="index.html">Home</a>
+      <a href="framework.html">Threat Library & Tool</a>
+      <a href="report.html" class="active">Report Incident</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Submit Threat Incident Report</h2>
+    <form id="incident-form" class="form-card">
+      <label for="reporter-name">Reporter Name / Organization:</label>
+      <input type="text" id="reporter-name" required>
+
+      <label for="threat-type">Threat Type:</label>
+      <select id="threat-type" required>
+        <option value="DDoS">DDoS Attack</option>
+        <option value="Ransomware">Ransomware / Malware</option>
+        <option value="Phishing">Credential Phishing</option>
+        <option value="BGP">BGP Hijacking</option>
+      </select>
+
+      <label for="details">Incident Details:</label>
+      <textarea id="details" rows="5" required></textarea>
+
+      <button type="submit">Submit Report</button>
+    </form>
+    <div id="form-response"></div>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="currentyear"></span> | ISP Cyber Mitigation Hub | Zimbabwe</p>
+    <p id="lastModified"></p>
+    <p><a href="references.html">References & Attributions</a></p>
+  </footer>
+</body>
+</html>

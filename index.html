@@ -1,102 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="WDD 131 – Dynamic Web Fundamentals – Masango – Personal home page showcasing web development skills using HTML, CSS, and JavaScript.">
-    <meta name="author" content="Masango">
-
-    <title>WDD 131 – Dynamic Web Fundamentals – Masango</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- CSS -->
+    <title>WDD 131 – Dynamic Web Fundamentals – Masango Dewheretsoko</title>
+    <meta name="description" content="WDD 131 – Dynamic Web Fundamentals home page for Masango Dewheretsoko featuring course assignments, personal profile, and web development resources.">
+    <meta name="author" content="Masango Dewheretsoko">
     <link rel="stylesheet" href="styles/base.css">
-
-    <!-- JavaScript -->
     <script src="scripts/getdates.js" defer></script>
 </head>
-
 <body>
-
-<header>
-    <span id="course-title">WDD 131 – Dynamic Web Fundamentals</span>
-
+    <header>
+        <span id="course-title">WDD 131: Dynamic Web Fundamentals</span>
+    </header>
+    
     <nav>
-        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
-        <a href="https://byupw.instructure.com/" target="_blank">Canvas</a>
-        <a href="https://www.churchofjesuschrist.org/study/scriptures" target="_blank">Scripture</a>
-        <a href="#">Final Project</a>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://byupw.instructure.com/" target="_blank" rel="noopener">I-Learn</a>
+        <a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/3?lang=eng&id=p7#p7" target="_blank" rel="noopener">Scripture</a>
+        <a href="project/index.html">Final Project</a>
     </nav>
-</header>
 
-<main>
+    <main>
+        <h1>Masango Dewheretsoko</h1>
 
-    <h1>Masango</h1>
+        <div class="grid-container">
+            <section class="card">
+                <h2>About Me</h2>
+                <div class="card-body">
+                    <div class="profile-top">
+                        <p>My name is Masango Dewheretsoko. I was born and live with my family in Zimbabwe. I am currently working on software development and web infrastructure. I love to build automation tools and learn new technologies.</p>
+                        <img src="images/profile.jpg" alt="Masango Dewheretsoko profile picture">
+                    </div>
 
-    <section class="card">
-        <h2>About Me</h2>
+                    <div class="sub-heading">Harare, Zimbabwe</div>
 
-        <img src="images/profile.jpg" alt="Portrait of Masango">
+                    <div class="country-section">
+                        <div class="flag-container">
+                            <img src="images/flag.png" alt="Official Flag of Zimbabwe">
+                            <div class="flag-caption">Official Flag of Zimbabwe</div>
+                        </div>
+                        <p>Zimbabwe is a landlocked country in Southern Africa known for its dramatic landscape and diverse wildlife. Harare is the capital and largest city, serving as the commercial and cultural hub of the nation.</p>
+                    </div>
+                </div>
+            </section>
 
-        <p>
-            I am learning web development using HTML, CSS, and JavaScript.
-            I enjoy creating responsive websites and continuously improving my
-            programming skills.
-        </p>
+            <section class="card">
+                <h2>Web Dev Resources</h2>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="https://dev.to" target="_blank" rel="noopener">Dev.to Community</a></li>
+                        <li><a href="https://www.smashingmagazine.com" target="_blank" rel="noopener">Smashing Magazine</a></li>
+                        <li><a href="https://css-tricks.com" target="_blank" rel="noopener">CSS Tricks</a></li>
+                        <li><a href="https://www.w3schools.com" target="_blank" rel="noopener">W3 Schools</a></li>
+                        <li><a href="https://www.udemy.com" target="_blank" rel="noopener">Udemy</a></li>
+                        <li><a href="https://picsum.photos" target="_blank" rel="noopener">Lorem Picsum Image Placeholder</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
 
-        <h3>Useful Links</h3>
-
-        <ul>
-            <li>
-                <a href="https://github.com/Masango763" target="_blank">
-                    My GitHub
-                </a>
-            </li>
-
-            <li>
-                <a href="https://developer.mozilla.org/" target="_blank">
-                    MDN Web Docs
-                </a>
-            </li>
-
-            <li>
-                <a href="https://www.w3schools.com/" target="_blank">
-                    W3Schools
-                </a>
-            </li>
-        </ul>
-
-    </section>
-
-    <section class="card">
-
-        <h2>My Interests</h2>
-
-        <img src="images/hobby.jpg" alt="Person working on a computer as a hobby">
-
-        <p>
-            My interests include coding, web development, problem solving,
-            learning new technologies, and building useful websites.
-        </p>
-
-    </section>
-
-</main>
-
-<footer>
-
-    <p>
-        &copy; <span id="currentyear"></span> Masango | Zimbabwe
-    </p>
-
-    <p id="lastModified"></p>
-
-</footer>
-
+    <footer>
+        <p>&copy;<span id="currentyear"></span> 🌸 Masango Dewheretsoko 🌸 Zimbabwe</p>
+        <p id="lastModified"></p>
+    </footer>
 </body>
 </html>

@@ -40,6 +40,7 @@ const threatGrid = document.querySelector("#threat-grid");
 const categoryFilter = document.querySelector("#category-filter");
 const favCountSpan = document.querySelector("#fav-count");
 const currentYearSpan = document.querySelector("#current-year");
+const lastModifiedPara = document.querySelector("#last-modified");
 const securityForm = document.querySelector("#security-form");
 
 function renderThreatCards(items, targetContainer) {
@@ -84,8 +85,14 @@ function loadBookmarkDisplay() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Dynamic Copyright Year
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Dynamic Last Modified Date
+    if (lastModifiedPara) {
+        lastModifiedPara.textContent = `Last Modified: ${document.lastModified}`;
     }
 
     loadBookmarkDisplay();

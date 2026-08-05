@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Report suspicious phishing links, request password hygiene reviews, or contact CyberGuard specialists.">
+    <meta name="author" content="Masango Dewheretsoko">
+    <title>CyberGuard | Report &amp; Contact</title>
+    <link rel="stylesheet" href="styles/project.css">
+    <script src="scripts/project.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="site-logo">🛡️ CyberGuard</span>
+        </div>
+        <button id="hamburger-btn" aria-label="Toggle Navigation Menu">&#9776;</button>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="threats.html">Threat Database</a></li>
+                <li><a href="contact.html" class="active">Report &amp; Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="form-wrapper">
+            <h1>Report Suspicious Activity / Contact Us</h1>
+            <p>Suspect you clicked a malicious phishing link or need assistance reviewing account security? Submit your details below.</p>
+
+            <form id="security-form" method="get" action="index.html">
+                <div class="form-item">
+                    <label for="user-name">Full Name *</label>
+                    <input type="text" id="user-name" name="userName" required placeholder="Jane Doe">
+                </div>
+
+                <div class="form-item">
+                    <label for="user-email">Email Address *</label>
+                    <input type="email" id="user-email" name="userEmail" required placeholder="jane@example.com">
+                </div>
+
+                <div class="form-item">
+                    <label for="incident-type">Incident / Inquiry Category *</label>
+                    <select id="incident-type" name="incidentType" required>
+                        <option value="" disabled selected>Select category...</option>
+                        <option value="phishing">Phishing Email / Link Inspection</option>
+                        <option value="password">Password Audit / Consultation</option>
+                        <option value="general">General Security Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-item">
+                    <label for="incident-details">Incident Details / Message *</label>
+                    <textarea id="incident-details" name="incidentDetails" rows="5" required placeholder="Provide URLs, email headers, or specific questions..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit Report</button>
+            </form>
+            <div id="form-feedback" class="feedback-msg"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> CyberGuard Security Hub. All rights reserved.</p>
+        <p><a href="references.html">References &amp; Citations</a></p>
+    </footer>
+</body>
+</html>

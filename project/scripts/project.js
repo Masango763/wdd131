@@ -33,16 +33,6 @@ const threatData = [
     }
 ];
 
-const hamburgerBtn = document.querySelector("#hamburger-btn");
-const primaryNav = document.querySelector("#primary-nav");
-const featuredGrid = document.querySelector("#featured-grid");
-const threatGrid = document.querySelector("#threat-grid");
-const categoryFilter = document.querySelector("#category-filter");
-const favCountSpan = document.querySelector("#fav-count");
-const currentYearSpan = document.querySelector("#current-year");
-const lastModifiedPara = document.querySelector("#last-modified");
-const securityForm = document.querySelector("#security-form");
-
 function renderThreatCards(items, targetContainer) {
     if (!targetContainer) return;
 
@@ -61,12 +51,20 @@ function renderThreatCards(items, targetContainer) {
     targetContainer.innerHTML = htmlMarkup;
 }
 
-function filterThreats(selectedCategory) {
+function filterThreats(selectedCategory, targetGrid) {
     if (selectedCategory === "all") {
-        renderThreatCards(threatData, threatGrid);
+        renderThreatCards(threatData, targetGrid);
     } else {
         const filtered = threatData.filter(item => item.category === selectedCategory);
-        renderThreatCards(filtered, threatGrid);
+        renderThreatCards(filtered, targetGrid);
+    }
+}
+
+function updateBookmarkDisplay() {
+    const favCountSpan = document.querySelector("#fav-count");
+    if (favCountSpan) {
+        const count = localStorage.getItem("cyberguard_bookmarks") || 0;
+        favCountSpan.textContent = count;
     }
 }
 
@@ -74,26 +72,28 @@ function saveBookmark() {
     let count = parseInt(localStorage.getItem("cyberguard_bookmarks")) || 0;
     count += 1;
     localStorage.setItem("cyberguard_bookmarks", count);
-    loadBookmarkDisplay();
-}
-
-function loadBookmarkDisplay() {
-    const savedCount = localStorage.getItem("cyberguard_bookmarks") || 0;
-    if (favCountSpan) {
-        favCountSpan.textContent = savedCount;
-    }
+    updateBookmarkDisplay();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Dynamic Year
+    const currentYearSpan = document.querySelector("#current-year");
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
+    // 2. Dynamic Last Modified Date and Time
+    const lastModifiedPara = document.querySelector("#last-modified");
     if (lastModifiedPara) {
         lastModifiedPara.textContent = `Last Modified: ${document.lastModified}`;
     }
 
-    loadBookmarkDisplay();
+    // 3. Initial Bookmark Count
+    updateBookmarkDisplay();
+
+    // 4. Render Cards
+    const featuredGrid = document.querySelector("#featured-grid");
+    const threatGrid = document.querySelector("#threat-grid");
 
     if (featuredGrid) {
         renderThreatCards(threatData.slice(0, 3), featuredGrid);
@@ -103,19 +103,25 @@ document.addEventListener("DOMContentLoaded", () => {
         renderThreatCards(threatData, threatGrid);
     }
 
+    // 5. Navigation Menu Toggle
+    const hamburgerBtn = document.querySelector("#hamburger-btn");
+    const primaryNav = document.querySelector("#primary-nav");
     if (hamburgerBtn && primaryNav) {
         hamburgerBtn.addEventListener("click", () => {
             primaryNav.classList.toggle("open");
         });
     }
 
-    if (categoryFilter) {
+    // 6. Category Filter
+    const categoryFilter = document.querySelector("#category-filter");
+    if (categoryFilter && threatGrid) {
         categoryFilter.addEventListener("change", (e) => {
-            filterThreats(e.target.value);
+            filterThreats(e.target.value, threatGrid);
         });
     }
 
-    document.body.addEventListener("click", (e) => {
+    // 7. Click Event for Bookmark Buttons
+    document.addEventListener("click", (e) => {
         if (e.target && e.target.classList.contains("btn-bookmark")) {
             saveBookmark();
             const originalText = e.target.textContent;
@@ -124,20 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 e.target.textContent = originalText;
                 e.target.style.backgroundColor = "";
-            }, 1500);
+            }, 1200);
         }
     });
 
-    const counterBadge = document.querySelector(".counter-badge");
-    if (counterBadge) {
-        counterBadge.style.cursor = "pointer";
-        counterBadge.title = "Click to reset bookmark counter";
-        counterBadge.addEventListener("click", () => {
-            localStorage.setItem("cyberguard_bookmarks", 0);
-            loadBookmarkDisplay();
-        });
-    }
-
+    // 8. Contact Form
+    const securityForm = document.querySelector("#security-form");
     if (securityForm) {
         securityForm.addEventListener("submit", (e) => {
             e.preventDefault();

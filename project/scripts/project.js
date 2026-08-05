@@ -53,7 +53,7 @@ function renderThreatCards(items, targetContainer) {
                 <h3>${item.title}</h3>
                 <p><strong>Risk Level:</strong> ${item.riskLevel}</p>
                 <p>${item.description}</p>
-                <button class="btn-bookmark" data-id="${item.id}">Bookmark Resource</button>
+                <button class="btn-bookmark" data-id="${item.id}" type="button">📌 Bookmark Resource</button>
             </div>
         </article>
     `).join("");
@@ -85,12 +85,10 @@ function loadBookmarkDisplay() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Dynamic Copyright Year
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // Dynamic Last Modified Date
     if (lastModifiedPara) {
         lastModifiedPara.textContent = `Last Modified: ${document.lastModified}`;
     }
@@ -118,10 +116,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.body.addEventListener("click", (e) => {
-        if (e.target.classList.contains("btn-bookmark")) {
+        if (e.target && e.target.classList.contains("btn-bookmark")) {
             saveBookmark();
+            const originalText = e.target.textContent;
+            e.target.textContent = "✅ Bookmarked!";
+            e.target.style.backgroundColor = "#10b981";
+            setTimeout(() => {
+                e.target.textContent = originalText;
+                e.target.style.backgroundColor = "";
+            }, 1500);
         }
     });
+
+    const counterBadge = document.querySelector(".counter-badge");
+    if (counterBadge) {
+        counterBadge.style.cursor = "pointer";
+        counterBadge.title = "Click to reset bookmark counter";
+        counterBadge.addEventListener("click", () => {
+            localStorage.setItem("cyberguard_bookmarks", 0);
+            loadBookmarkDisplay();
+        });
+    }
 
     if (securityForm) {
         securityForm.addEventListener("submit", (e) => {
